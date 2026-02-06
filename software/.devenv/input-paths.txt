@@ -1,0 +1,7 @@
+/Users/zakgrivell/dev/design-project/adc/.devenv/flake.json
+/Users/zakgrivell/dev/design-project/adc/.devenv.flake.nix
+/Users/zakgrivell/dev/design-project/adc/.env
+/Users/zakgrivell/dev/design-project/adc/devenv.local.nix
+/Users/zakgrivell/dev/design-project/adc/devenv.lock
+/Users/zakgrivell/dev/design-project/adc/devenv.nix
+/Users/zakgrivell/dev/design-project/adc/devenv.yaml
