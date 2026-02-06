@@ -4,12 +4,12 @@
       vars = {
   version = "1.11.2";
   system = "aarch64-darwin";
-  devenv_root = "/Users/zakgrivell/dev/design-project/adc";
-  project_input_ref = "path:/Users/zakgrivell/dev/design-project/adc";
-  devenv_dotfile = "/Users/zakgrivell/dev/design-project/adc/.devenv";
+  devenv_root = "/Users/zakgrivell/dev/design-project/software";
+  project_input_ref = "path:/Users/zakgrivell/dev/design-project/software";
+  devenv_dotfile = "/Users/zakgrivell/dev/design-project/software/.devenv";
   devenv_dotfile_path = ./.devenv;
   devenv_tmpdir = "/var/folders/6q/1xz1sspn4nq1fgsfv0kndp5m0000gn/T/";
-  devenv_runtime = "/var/folders/6q/1xz1sspn4nq1fgsfv0kndp5m0000gn/T/devenv-573b543";
+  devenv_runtime = "/var/folders/6q/1xz1sspn4nq1fgsfv0kndp5m0000gn/T/devenv-c3f0211";
   devenv_istesting = false;
   devenv_direnvrc_latest_version = 1;
   container_name = null;
@@ -17,7 +17,7 @@
   ];
   hostname = "zakbook";
   username = "zakgrivell";
-  git_root = null;
+  git_root = "/Users/zakgrivell/dev/design-project";
   secretspec = null;
 };
     in
@@ -41,12 +41,12 @@
       vars = {
   version = "1.11.2";
   system = "aarch64-darwin";
-  devenv_root = "/Users/zakgrivell/dev/design-project/adc";
-  project_input_ref = "path:/Users/zakgrivell/dev/design-project/adc";
-  devenv_dotfile = "/Users/zakgrivell/dev/design-project/adc/.devenv";
+  devenv_root = "/Users/zakgrivell/dev/design-project/software";
+  project_input_ref = "path:/Users/zakgrivell/dev/design-project/software";
+  devenv_dotfile = "/Users/zakgrivell/dev/design-project/software/.devenv";
   devenv_dotfile_path = ./.devenv;
   devenv_tmpdir = "/var/folders/6q/1xz1sspn4nq1fgsfv0kndp5m0000gn/T/";
-  devenv_runtime = "/var/folders/6q/1xz1sspn4nq1fgsfv0kndp5m0000gn/T/devenv-573b543";
+  devenv_runtime = "/var/folders/6q/1xz1sspn4nq1fgsfv0kndp5m0000gn/T/devenv-c3f0211";
   devenv_istesting = false;
   devenv_direnvrc_latest_version = 1;
   container_name = null;
@@ -54,7 +54,7 @@
   ];
   hostname = "zakbook";
   username = "zakgrivell";
-  git_root = null;
+  git_root = "/Users/zakgrivell/dev/design-project";
   secretspec = null;
 };
       devenv =

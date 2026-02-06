@@ -1,1 +1,5 @@
-/nix/store/s7nsgwrr4zxk1l6nsg955gnhdnf28c5a-mbedignore
+.devenv
+.direnv
+.nix
+result
+.git

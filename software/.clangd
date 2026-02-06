@@ -1,1 +1,8 @@
-/nix/store/w53icwyfamxn26lccv133zcsm2b9yysb-clangd
+CompileFlags:
+  Add:
+  - --target=arm-none-eabi
+  - -xc++
+  - -std=c++14
+  - --include-directory=/nix/store/s2cxl0c91gqd1sc6n0zykii56x1s8k0i-gcc-arm-embedded-10.3-2021.10/arm-none-eabi/include/c++/10.3.1
+  - --include-directory=/nix/store/s2cxl0c91gqd1sc6n0zykii56x1s8k0i-gcc-arm-embedded-10.3-2021.10/arm-none-eabi/include/c++/10.3.1/arm-none-eabi
+  CompilationDatabase: .
