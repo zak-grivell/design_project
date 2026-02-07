@@ -5,98 +5,88 @@
  */
 
 #include "mbed.h"
+#include <cstdint>
 
-CircularBuffer<int, 128> raw_data;
+#define BUFFER_LENGTH 128
 
-CircularBuffer<int, 64> data;
+class PulseSensor {
+    private:
+        AnalogIn ain;
+        Ticker t;
+        bool reader;
 
-int raw_sum;
-int negative_sum = 0;
-int positive_sum = 0;
-int previous;
-
-int apply_processing(int reading) {
-    if (raw_data.full()) {
-        int oldest_value;
-        raw_data.pop(oldest_value);
-        raw_sum -= oldest_value;
-    }
-
-    int filtered = (reading + previous) / 2;
-    raw_sum += filtered;
-    raw_data.push(filtered);
-
-    previous = filtered;
-
-    int y = filtered - (raw_sum / raw_data.size());
-
-    data.push(y);
-
-    return y;
-}
-
-
-// determines the min and max of each period to ensure propper capture even when the value heights change
-int sensor_min = 0;
-int sensor_max = 0;
-
-void determine_bounds(int reading) {
-    for (int i = 0; i < 128; i++) {
-        int val;
-        data.pop(val);
-        data.push(val);
-
-        if (val > sensor_max) {
-            sensor_max = val;
+        void set_ready() {
+            reader = true;
         }
 
-        if (val < sensor_min) {
-            sensor_min = val;
+        uint16_t data[BUFFER_LENGTH];
+        uint16_t data_index = 0;
+
+        int16_t sensor_min = 0;
+        int16_t sensor_max = 0;
+        int16_t average = 0;
+
+        void compute_bounds() {
+            uint32_t sum = 0;
+            for (uint32_t y: data) {
+                sum += y;
+
+                if (y < sensor_min) {
+                    sensor_min = y;
+                }
+
+                if (y > sensor_max) {
+                    sensor_max = y;
+                }
+            }
+
+            average = sum / BUFFER_LENGTH;
         }
-    }
+    public:
+        PulseSensor(PinName name, std::chrono::microseconds rate): ain(name) {
+            t.attach(callback(this, &PulseSensor::set_ready), 5ms);
+        }
+
+        bool is_ready() {
+            if (reader) {
+                reader = false;
+                return true;
+            }
+            return false;
+        }
+
+        uint16_t take_reading_u16() {
+            uint8_t previous_index = data_index == 0 ? 127 : (data_index - 1);
+
+            uint16_t value = (ain.read_u16() + data[previous_index]) / 2;
+            
+            data[data_index % 128] = value;
+
+            data_index = (data_index + 1) % 128;
+
+            uint16_t scaled = ((value - sensor_min) * 65535) / (sensor_max - sensor_min);
+
+            return scaled;
+        }
+
+};
+
+
+uint16_t to_matrix_level(uint16_t scaled) {
+    return scaled & 0xFF00;
 }
 
-// PulseSensor pulse_sensor(p19, 5ms);
+PulseSensor pulse_sensor(p19, 5ms);
 AnalogOut aout(p18);
-AnalogIn ain(p19);
-Ticker t;
-bool ready = false;
-
-void set_ready() {
-    ready = true;
-}
-
-int make_3bit_reading() {
-    int reading = (int)ain.read_u16();
-
-    reading = apply_processing(reading);
-
-    determine_bounds(reading);
-
-    float norm = ((float)reading - (float)sensor_min) / ((float)sensor_max - (float)sensor_min);
-
-    if (norm < 0) {
-        norm = 0;
-    } else if (norm > 1) {
-        norm = 1;
-    }
-
-    int three_bit = norm * 7.0f + 0.25f;
-
-    int scaled = three_bit * 9362;
-
-    return scaled;
-}
-
 
 int main() {
-    t.attach(&set_ready, 5ms);
     while (true) {
-        if (ready) {
-            ready = false;
-            int byte_val = make_3bit_reading();
+        if (pulse_sensor.is_ready()) {
+            uint16_t reading = pulse_sensor.take_reading_u16();
 
-            aout.write_u16(byte_val);
+            uint16_t matrix_level = to_matrix_level(reading);
+            
+            aout.write_u16(matrix_level);
         }
     }
 }

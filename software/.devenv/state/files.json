@@ -1,6 +1,3 @@
 {
-  "managedFiles": [
-    ".clangd",
-    ".mbedignore"
-  ]
+  "managedFiles": []
 }
