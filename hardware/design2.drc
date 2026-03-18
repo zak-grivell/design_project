@@ -1,0 +1,77 @@
+Date and Time : 02/27/26 13:19:08
+
+--------------------------------------------------
+Checking Schematic: SCHEMATIC1
+--------------------------------------------------
+Checking Electrical Rules 
+
+Checking For Single Node Nets
+
+Checking For Unconnected Bus Nets
+
+Checking Physical Rules 
+
+
+Checking Pins and Pin Connections
+
+--------------------------------------------------
+Checking Schematic: SCHEMATIC1
+--------------------------------------------------
+
+INFO(ORCAP-2242): Checking Incorrect Pin Group Assignment
+
+Report for Invalid References
+ERROR(ORCAP-1616): Reference is invalid for this part 9.53k 
+                    SCHEMATIC1, PAGE1  (10.60, 1.40) 
+
+Report for Duplicate References
+
+--------------------------------------------------
+Checking Entire Design: DESIGN2 
+--------------------------------------------------
+
+Checking Power Pin Visibility  
+
+Checking Normal Convert View Sync  
+INFO(ORCAP-36105): Checking Missing Pin Numbers  
+
+Checking Device with Zero pins  
+INFO(ORCAP-36101): Checking Missing PCB Footprint Property  
+#1 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance U10: SCHEMATIC1, PAGE1 (11.30, 1.20).
+#2 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance U12: SCHEMATIC1, PAGE1 (11.50, 7.00).
+#3 ERROR(ORCAP-36071): Illegal character "Forward Slash(/)" found in "PCB Footprint" property for component instance C6: SCHEMATIC1, PAGE1 (10.80, 7.60) .
+#4 ERROR(ORCAP-36071): Illegal character "Forward Slash(/)" found in "PCB Footprint" property for component instance C7: SCHEMATIC1, PAGE1 (12.70, 7.60) .
+#5 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance D1: SCHEMATIC1, PAGE1 (5.90, 4.30).
+#6 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance 9.53k: SCHEMATIC1, PAGE1 (10.60, 1.40).
+#7 ERROR(ORCAP-36071): Illegal character "Forward Slash(/)" found in "PCB Footprint" property for component instance R12: SCHEMATIC1, PAGE1 (12.30, 5.10) .
+#8 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance U5: SCHEMATIC1, PAGE1 (2.20, 1.60).
+#9 ERROR(ORCAP-36071): Illegal character "Forward Slash(/)" found in "PCB Footprint" property for component instance R10: SCHEMATIC1, PAGE1 (5.90, 3.90) .
+#10 ERROR(ORCAP-36071): Illegal character "Forward Slash(/)" found in "PCB Footprint" property for component instance R11: SCHEMATIC1, PAGE1 (12.30, 4.70) .
+#11 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance U11A: SCHEMATIC1, PAGE1 (9.10, 0.80).
+#12 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance U11B: SCHEMATIC1, PAGE1 (10.10, 0.80).
+#13 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance U11C: SCHEMATIC1, PAGE1 (9.10, 1.50).
+#14 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance U11D: SCHEMATIC1, PAGE1 (10.10, 1.50).
+#15 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance U11E: SCHEMATIC1, PAGE1 (9.10, 2.30).
+#16 ERROR(ORCAP-36002): Property "PCB Footprint" missing from instance U11F: SCHEMATIC1, PAGE1 (10.10, 2.30).
+
+Checking Name Property for Hierarchical Instances  
+
+INFO(ORCAP-2211): Check High Speed Properties Syntax
+
+INFO(ORCAP-2212): Check Power Ground Mismatch
+WARNING(ORCAP-1589): Net has two or more aliases that might lead to a short. Ensure nets are not shorted together or nets do not have two or more aliases. This message is displayed because 'Report all net names' is set in Design Rules Check dialog. LCD1,P5V  P5V  5V
+                    SCHEMATIC1, PAGE1  (11.80, 5.20) 
+WARNING(ORCAP-1589): Net has two or more aliases that might lead to a short. Ensure nets are not shorted together or nets do not have two or more aliases. This message is displayed because 'Report all net names' is set in Design Rules Check dialog. 3V3  3V3  GND  
+                    SCHEMATIC1, PAGE1  (5.20, 9.20) 
+WARNING(ORCAP-1589): Net has two or more aliases that might lead to a short. Ensure nets are not shorted together or nets do not have two or more aliases. This message is displayed because 'Report all net names' is set in Design Rules Check dialog. LCD1,GND  GND  3V3
+                    SCHEMATIC1, PAGE1  (11.80, 4.80) 
+WARNING(ORCAP-1589): Net has two or more aliases that might lead to a short. Ensure nets are not shorted together or nets do not have two or more aliases. This message is displayed because 'Report all net names' is set in Design Rules Check dialog. U9,GND  GND  3V3
+                    SCHEMATIC1, PAGE1  (5.20, 8.90) 
+WARNING(ORCAP-1589): Net has two or more aliases that might lead to a short. Ensure nets are not shorted together or nets do not have two or more aliases. This message is displayed because 'Report all net names' is set in Design Rules Check dialog. U1,GND  GND  3V3
+                    SCHEMATIC1, PAGE1  (7.20, 8.70) 
+
+Reporting Unused Refdes in multiple part packages
+Part	                       Quantity	                       Reference
+-----------------------------------------------------------------------------------------
+   MCP6292_2	                       1	                       U1: A  
+   MCP6292_2	                       1	                       U9: B  
