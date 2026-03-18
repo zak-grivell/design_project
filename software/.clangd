@@ -1,8 +1,19 @@
 CompileFlags:
   Add:
-  - --target=arm-none-eabi
-  - -xc++
-  - -std=c++14
-  - --include-directory=/nix/store/s2cxl0c91gqd1sc6n0zykii56x1s8k0i-gcc-arm-embedded-10.3-2021.10/arm-none-eabi/include/c++/10.3.1
-  - --include-directory=/nix/store/s2cxl0c91gqd1sc6n0zykii56x1s8k0i-gcc-arm-embedded-10.3-2021.10/arm-none-eabi/include/c++/10.3.1/arm-none-eabi
-  CompilationDatabase: .
+    - "--target=arm-none-eabi"
+    # CHANGE HERE: Set the bare-metal sysroot and disable all standard includes
+    - "--sysroot=/nix/store/plpn17rykzby7pm2c4a6lvf06ww6fvx9-gcc-arm-embedded-10.3-2021.10/arm-none-eabi"
+    - "-nostdinc"
+    - "-nostdinc++"
+    - "-xc++"
+    - "-std=c++14"
+    - "-isystem/nix/store/plpn17rykzby7pm2c4a6lvf06ww6fvx9-gcc-arm-embedded-10.3-2021.10/arm-none-eabi/include/c++/10.3.1"
+    - "-isystem/nix/store/plpn17rykzby7pm2c4a6lvf06ww6fvx9-gcc-arm-embedded-10.3-2021.10/arm-none-eabi/include/c++/10.3.1/arm-none-eabi"
+    - "-isystem/nix/store/plpn17rykzby7pm2c4a6lvf06ww6fvx9-gcc-arm-embedded-10.3-2021.10/arm-none-eabi/include"
+    - "-isystem/nix/store/plpn17rykzby7pm2c4a6lvf06ww6fvx9-gcc-arm-embedded-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include"
+    - "-isystem/nix/store/plpn17rykzby7pm2c4a6lvf06ww6fvx9-gcc-arm-embedded-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include-fixed"
+  Remove:
+    - "-mbranch-protection*"
+  CompilationDatabase: "."
+Diagnostics:
+  SystemHeaders: false

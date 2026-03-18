@@ -14,8 +14,11 @@ project(${APP_TARGET})
 add_subdirectory(${MBED_PATH})
 
 add_executable(${APP_TARGET}
-    main.cpp
+    src/main.cpp
+    src/pulse_sensor.cpp
+    src/matrix_display.cpp
 )
+target_include_directories(${APP_TARGET} PUBLIC include)
 
 target_link_libraries(${APP_TARGET} mbed-os)
 
