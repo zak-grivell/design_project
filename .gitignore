@@ -1,2 +1,4 @@
 .mbedbuild
 cmake_build/
+.cache/
+mbed-os/
