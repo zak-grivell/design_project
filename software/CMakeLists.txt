@@ -12,6 +12,7 @@ include(${MBED_PATH}/tools/cmake/app.cmake)
 project(${APP_TARGET})
 
 add_subdirectory(${MBED_PATH})
+add_subdirectory(textlcd)
 
 add_executable(${APP_TARGET}
     src/main.cpp
@@ -20,7 +21,7 @@ add_executable(${APP_TARGET}
 )
 target_include_directories(${APP_TARGET} PUBLIC include)
 
-target_link_libraries(${APP_TARGET} mbed-os)
+target_link_libraries(${APP_TARGET} mbed-os textlcd)
 
 mbed_set_post_build(${APP_TARGET})
 

@@ -2,7 +2,6 @@
 #include <cstdint>
 #include "pulse_sensor.hpp"
 
-
 PulseSensor::PulseSensor(PinName name, std::chrono::microseconds rate) : ain(name) {
     t.attach(callback(this, &PulseSensor::set_ready), rate);
     ready_to_read = false;
@@ -55,3 +54,26 @@ uint16_t PulseSensor::take_reading_u16() {
     return scaled;
 }
 
+float PulseSensor::get_heart_rate(uint16_t reading) {
+    if (this->rising_edge && reading < 16384) {
+        this->rising_edge = false;
+    } else {
+        this->rising_edge = true;
+
+        this->pulse_timer.stop();
+
+        std::chrono::microseconds time = this->pulse_timer.elapsed_time();
+
+        this->time_buffer[time_buffer_index] = time;
+
+        int64_t total = 0;
+
+        for (int i = 0; i < TIME_BUFFER_LENGTH; i++) {
+            total += this->time_buffer[i].count();
+        }
+
+        this->average_pulse = (float)TIME_BUFFER_LENGTH / (float)total;        
+    }
+
+    return this->average_pulse;
+}
