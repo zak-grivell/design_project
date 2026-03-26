@@ -13,7 +13,7 @@
 
 PulseSensor pulse_sensor(p19, 20ms);
 MatrixDisplay mat(p5, p7, p8, 100000);
-DigitalIn button(p22);
+DigitalIn led_switch(p22);
 PwmOut led(p21);
 TextLCD text_lcd(p30, p29, p28, p27, p26, p25);
 
@@ -24,15 +24,14 @@ int main() {
         if (pulse_sensor.is_ready()) {
             uint16_t reading = pulse_sensor.take_reading_u16();
 
-            if (button) {
-                led.suspend();
+            // if (led_switch) {
+                // led = 0;
                 float heart_rate = pulse_sensor.get_heart_rate(reading);
-                
-                text_lcd.printf("Heart Rate=%.1f V\n", heart_rate);
-            } else {
+                text_lcd.printf("Heart Rate=%d\n", (int)(heart_rate));
+            // } else {
                 led.write((float)reading / 65535);
-                text_lcd.printf("\n");
-            }
+                // text_lcd.printf("\n");
+            // }
 
             mat.display_next(reading);
         }

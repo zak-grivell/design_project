@@ -29,10 +29,10 @@ MatrixDisplay::MatrixDisplay(PinName mosi, PinName slck, PinName load_pin,
 
   write(max7219_reg_scanLimit, 0x07);
   write(max7219_reg_decodeMode,
-               0x00);                       // using an led matrix (not digits)
-  write(max7219_reg_shutdown, 0x01); // not in shutdown mode
+        0x00);                          // using an led matrix (not digits)
+  write(max7219_reg_shutdown, 0x01);    // not in shutdown mode
   write(max7219_reg_displayTest, 0x00); // no display test
-  for (int e = 1; e <= 8; e++) { // empty registers, turn all LEDs off
+  for (int e = 1; e <= 8; e++) {        // empty registers, turn all LEDs off
     write(e, 0);
   }
   // maxAll(max7219_reg_intensity, 0x0f & 0x0f);    // the first 0x0f is the
@@ -47,36 +47,31 @@ void MatrixDisplay::write(int reg, int col) {
   load = 1;
 }
 
-char pattern_diagonal[8] = {0x01, 0x2, 0x4, 0x08, 0x10, 0x20, 0x40, 0x80};
-char pattern_square[8] = {0xff, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0xff};
-char pattern_star[8] = {0x04, 0x15, 0x0e, 0x1f, 0x0e, 0x15, 0x04, 0x00};
-
-
-// // writes 8 bytes to the display
-// void pattern_to_display(char *testdata) {
-//   int cdata;
-//   for (int idx = 0; idx <= 7; idx++) {
-//     cdata = testdata[idx];
-//     write_to_max(idx + 1, cdata);
-//   }
-// }
-//
-//
 void MatrixDisplay::display_next(uint16_t reading) {
+  // if (last_value == 0) { // speed down the reading
+  //   last_value = reading;
+  // } else {
+    // uint8_t average = last_value + reading / 2;
+    
     uint8_t level = reading >> 13;
 
     uint8_t pattern = 1 << level;
 
     buf[index] = pattern;
 
-    index++;
+    index = (index + 1) % 8;
+
+    this->send();
+
+    last_value = 0;
+  // }
 }
 
 void MatrixDisplay::send() {
   for (int i = 0; i < 8; i++) {
     int j = (i + index) % 8;
 
-    write(j, buf[j]);
+    write(i + 1, buf[j]);
   }
 }
 

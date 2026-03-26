@@ -12,8 +12,9 @@ class MatrixDisplay {
         DigitalOut load;
         SPI spi;
 
-        char buf[8];
+        char buf[8] = {};
         uint8_t index = 0;
+        uint16_t last_value = 0;
 
         void write(int reg, int col);
 

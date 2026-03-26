@@ -4,8 +4,8 @@
 #include "mbed.h"
 #include <cstdint>
 
-constexpr int BUFFER_LENGTH = 128;
-constexpr int TIME_BUFFER_LENGTH = 8;
+constexpr int BUFFER_LENGTH = 64;
+constexpr int TIME_BUFFER_LENGTH = 4;
 
 class PulseSensor {
     private:
