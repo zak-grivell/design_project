@@ -48,23 +48,24 @@ void MatrixDisplay::write(int reg, int col) {
 }
 
 void MatrixDisplay::display_next(uint16_t reading) {
-  // if (last_value == 0) { // speed down the reading
-  //   last_value = reading;
-  // } else {
-    // uint8_t average = last_value + reading / 2;
-    
-    uint8_t level = reading >> 13;
+  uint8_t level = reading >> 13;
 
-    uint8_t pattern = 1 << level;
+  uint8_t pattern = 1 << level;
 
-    buf[index] = pattern;
+  queued_value |= pattern;
+
+  this->readtime++;
+
+  if (this->readtime == 4) {
+    buf[index] = queued_value;
 
     index = (index + 1) % 8;
 
     this->send();
 
-    last_value = 0;
-  // }
+    queued_value = 0;
+    this->readtime = 0;
+  }
 }
 
 void MatrixDisplay::send() {

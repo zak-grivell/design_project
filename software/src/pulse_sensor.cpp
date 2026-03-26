@@ -59,9 +59,9 @@ uint16_t PulseSensor::take_reading_u16() {
 }
 
 float PulseSensor::get_heart_rate(uint16_t reading) {
-  if (this->rising_edge && reading < 16384) {
+  if (this->rising_edge && reading < LOWER_TRIGGER) {
     this->rising_edge = false;
-  } else if (!this->rising_edge && reading > 49152) {
+  } else if (!this->rising_edge && reading > UPPER_TRIGGER) {
     this->rising_edge = true;
 
     std::chrono::microseconds time = this->pulse_timer.elapsed_time();
@@ -71,13 +71,14 @@ float PulseSensor::get_heart_rate(uint16_t reading) {
     time_buffer_index =
         (time_buffer_index + 1) % TIME_BUFFER_LENGTH;
 
-    int64_t total = 0;
+    uint64_t total = 0;
 
     for (int i = 0; i < TIME_BUFFER_LENGTH; i++) {
       total += this->time_buffer[i].count();
     }
 
-    this->average_pulse = ((float)(TIME_BUFFER_LENGTH * 60'000'000) / (float)total);
+    float avg_interval = (float)total / (float)TIME_BUFFER_LENGTH;
+    this->average_pulse = 60'000'000.0f / avg_interval;
   }
 
   return this->average_pulse;

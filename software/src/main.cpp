@@ -27,7 +27,7 @@ int main() {
             // if (led_switch) {
                 // led = 0;
                 float heart_rate = pulse_sensor.get_heart_rate(reading);
-                text_lcd.printf("Heart Rate=%d\n", (int)(heart_rate));
+                text_lcd.printf("Heart Rate=%d\n\n", (int)(heart_rate));
             // } else {
                 led.write((float)reading / 65535);
                 // text_lcd.printf("\n");

@@ -14,7 +14,10 @@ class MatrixDisplay {
 
         char buf[8] = {};
         uint8_t index = 0;
-        uint16_t last_value = 0;
+
+        uint8_t readtime = 0;
+        uint8_t queued_value = 0;
+        
 
         void write(int reg, int col);
 

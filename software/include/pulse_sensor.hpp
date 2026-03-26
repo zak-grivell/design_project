@@ -7,6 +7,9 @@
 constexpr int BUFFER_LENGTH = 64;
 constexpr int TIME_BUFFER_LENGTH = 4;
 
+constexpr int UPPER_TRIGGER = 55705;
+constexpr int LOWER_TRIGGER = 9830;
+
 class PulseSensor {
     private:
         AnalogIn ain;
@@ -29,7 +32,7 @@ class PulseSensor {
         Timer pulse_timer;
         std::chrono::microseconds time_buffer[TIME_BUFFER_LENGTH];
         uint8_t time_buffer_index = 0;
-        int64_t average_pulse = 0;
+        float average_pulse = 0;
 
       public:
         PulseSensor(PinName name, std::chrono::microseconds rate);
