@@ -2,9 +2,8 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "DigitalOut.h"
-#include "PinNames.h"
 #include "mbed.h"
+#include "PinNames.h"
 #include <cstdint>
 
 class MatrixDisplay {
